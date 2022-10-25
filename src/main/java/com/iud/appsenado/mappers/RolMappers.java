@@ -7,7 +7,7 @@ public class RolMappers {
 
     public Rol rolDtoARol ( RolDto rolDto ) {
         Rol rol = new Rol ( );
-        rol.setRol_id ( rolDto.getRol_id ( ) );
+        rol.setRolId ( rolDto.getRolId ( ) );
         rol.setNombre ( rolDto.getNombre ( ) );
 
         return rol;
@@ -16,7 +16,7 @@ public class RolMappers {
 
     public RolDto rolARolDto ( Rol rol ) {
         RolDto rolDto = new RolDto ( );
-        rolDto.setRol_id ( rol.getRol_id ( ) );
+        rolDto.setRolId ( rol.getRolId ( ) );
         rolDto.setNombre ( rol.getNombre ( ) );
 
         return rolDto;

@@ -6,24 +6,24 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "rol")
+@Table(name = "roles")
 public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rol_id", unique = true, nullable = false)
-    private int rol_id;
+    @Column(name = "idRol", unique = true, nullable = false)
+    private int rolId;
 
 
-    @Column(name = "rol_nombre", nullable = false)
+    @Column(name = "nombreRol", nullable = false)
     private String nombre;
 
 
     public Rol ( ) {
     }
 
-    public Rol ( int rol_id , String nombre ) {
-        this.rol_id = rol_id;
+    public Rol ( int rolId , String nombre ) {
+        this.rolId = rolId;
         this.nombre = nombre;
     }
 

@@ -9,9 +9,9 @@ import javax.persistence.*;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @Column(name = "usuario_id", unique = true, nullable = false)
+    @Column(name = "idUsuario", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int usuario_id;
+    private int usuarioId;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -31,8 +31,8 @@ public class Usuario {
     public Usuario ( ) {
     }
 
-    public Usuario ( int usuario_id , String nombre , String correo , String contrasena , Rol rol ) {
-        this.usuario_id = usuario_id;
+    public Usuario ( int usuarioId , String nombre , String correo , String contrasena , Rol rol ) {
+        this.usuarioId = usuarioId;
         this.nombre = nombre;
         this.correo = correo;
         this.contrasena = contrasena;

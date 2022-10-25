@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UsuarioDto {
-    private int usuario_id;
+    private int usuarioId;
     private String nombre;
 
     private String correo;
@@ -16,8 +16,8 @@ public class UsuarioDto {
     public UsuarioDto ( ) {
     }
 
-    public UsuarioDto ( int usuario_id , String nombre , String correo , String contrasena , RolDto rol ) {
-        this.usuario_id = usuario_id;
+    public UsuarioDto ( int usuarioId , String nombre , String correo , String contrasena , RolDto rol ) {
+        this.usuarioId = usuarioId;
         this.nombre = nombre;
         this.correo = correo;
         this.contrasena = contrasena;

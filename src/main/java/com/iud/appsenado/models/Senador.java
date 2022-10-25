@@ -7,12 +7,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "senador")
+@Table(name = "senadores")
 public class Senador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "senador_id", unique = true, nullable = false)
-    private int senador_id;
+    @Column(name = "idSenador", unique = true, nullable = false)
+    private int senadorId;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -21,16 +21,16 @@ public class Senador {
     private  String departamento;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "partido")
-    private Partido_Politico  partido_id;
+    private PartidoPolitico partidoId;
 
     public Senador() {
     }
 
-    public Senador(int senador_id, String nombre, String departamento, Partido_Politico partido_id) {
-        this.senador_id = senador_id;
+    public Senador( int senadorId , String nombre, String departamento, PartidoPolitico partidoId ) {
+        this.senadorId = senadorId;
         this.nombre = nombre;
         this.departamento = departamento;
-        this.partido_id = partido_id;
+        this.partidoId = partidoId;
     }
 
 }

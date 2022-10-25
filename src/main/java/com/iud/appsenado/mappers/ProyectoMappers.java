@@ -7,10 +7,10 @@ public class ProyectoMappers {
 
     public Proyecto proyectoDtoAProyecto ( ProyectoDto proyectoDto ) {
         Proyecto proyecto = new Proyecto ( );
-        proyecto.setProyecto_id ( proyectoDto.getProyecto_id ( ) );
+        proyecto.setProyectoId ( proyectoDto.getProyectoId ( ) );
         proyecto.setNombre ( proyectoDto.getNombre ( ) );
         proyecto.setDescripcion ( proyectoDto.getDescripcion ( ) );
-        proyecto.setFecha_creacion ( proyectoDto.getFecha_creacion ( ) );
+        proyecto.setFechaCreacion ( proyectoDto.getFechaCreacion ( ) );
 
         return proyecto;
 
@@ -18,10 +18,10 @@ public class ProyectoMappers {
 
     public ProyectoDto proyectoAProyectoDto ( Proyecto proyecto ) {
         ProyectoDto proyectoDto = new ProyectoDto ( );
-        proyectoDto.setProyecto_id ( proyecto.getProyecto_id ( ) );
+        proyectoDto.setProyectoId ( proyecto.getProyectoId ( ) );
         proyectoDto.setNombre ( proyecto.getNombre ( ) );
         proyectoDto.setDescripcion ( proyecto.getDescripcion ( ) );
-        proyectoDto.setFecha_creacion ( proyecto.getFecha_creacion ( ) );
+        proyectoDto.setFechaCreacion ( proyecto.getFechaCreacion ( ) );
 
         return proyectoDto;
 

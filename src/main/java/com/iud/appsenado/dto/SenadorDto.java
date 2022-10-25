@@ -5,23 +5,23 @@ import lombok.Data;
 @Data
 public class SenadorDto {
 
-    private int senador_id;
+    private int senadorId;
 
     private String nombre;
 
     private String departamento;
 
-    private Partido_PoliticoDto partido_id;
+    private PartidoPoliticoDto partidoId;
 
 
     public SenadorDto ( ) {
     }
 
-    public SenadorDto ( int senador_id , String nombre , String departamento , Partido_PoliticoDto partido_id ) {
-        this.senador_id = senador_id;
+    public SenadorDto ( int senadorId , String nombre , String departamento , PartidoPoliticoDto partidoId ) {
+        this.senadorId = senadorId;
         this.nombre = nombre;
         this.departamento = departamento;
-        this.partido_id = partido_id;
+        this.partidoId = partidoId;
     }
 
 }

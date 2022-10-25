@@ -12,26 +12,26 @@ public class Proyecto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "proyecto_id", unique = true, nullable = false)
-    private int proyecto_id;
+    @Column(name = "idProyecto", unique = true, nullable = false)
+    private int proyectoId;
 
-    @Column(name = "proyecto_nombre", nullable = false)
+    @Column(name = "nombreProyecto", nullable = false)
     private String nombre;
 
-    @Column(name = "proyecto_descripcion", nullable = false)
+    @Column(name = "descripcionProyecto", nullable = false)
     private String descripcion;
 
-    @Column(name = "proyecto_fecha_creacion", nullable = false)
-    private String fecha_creacion;
+    @Column(name = "fechaCreacionProyecto", nullable = false)
+    private String fechaCreacion;
 
 
     public Proyecto ( ) {
     }
 
-    public Proyecto ( int proyecto_id , String nombre , String descripcion , String fecha_creacion ) {
-        this.proyecto_id = proyecto_id;
+    public Proyecto ( int proyectoId , String nombre , String descripcion , String fechaCreacion ) {
+        this.proyectoId = proyectoId;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.fecha_creacion = fecha_creacion;
+        this.fechaCreacion = fechaCreacion;
     }
 }

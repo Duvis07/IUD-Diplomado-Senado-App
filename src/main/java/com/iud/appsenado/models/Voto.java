@@ -10,26 +10,26 @@ import javax.persistence.*;
 public class Voto {
 
     @Id
-    @Column(name = "voto_id", unique = true, nullable = false)
+    @Column(name = "votoId", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int voto_id;
+    private int votoId;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "proyecto")
-    private Proyecto proyecto_id;
+    @JoinColumn(name = "proyectoId")
+    private Proyecto proyectoId;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "senador")
-    private Senador senador_id;
+    @JoinColumn(name = "senadorId")
+    private Senador senadorId;
 
 
     public Voto() {
     }
 
-    public Voto(int voto_id, Proyecto proyecto_id, Senador senador_id) {
-        this.voto_id = voto_id;
-        this.proyecto_id = proyecto_id;
-        this.senador_id = senador_id;
+    public Voto( int votoId , Proyecto proyectoId , Senador senadorId ) {
+        this.votoId = votoId;
+        this.proyectoId = proyectoId;
+        this.senadorId = senadorId;
     }
 
 

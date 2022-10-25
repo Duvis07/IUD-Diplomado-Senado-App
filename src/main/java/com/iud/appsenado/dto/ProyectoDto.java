@@ -5,20 +5,20 @@ import lombok.Data;
 @Data
 public class ProyectoDto {
 
-    private int proyecto_id;
+    private int proyectoId;
     private String nombre;
     private String descripcion;
-    private String fecha_creacion;
+    private String fechaCreacion;
 
 
     public ProyectoDto ( ) {
     }
 
-    public ProyectoDto ( int proyecto_id , String nombre , String descripcion , String fecha_creacion ) {
-        this.proyecto_id = proyecto_id;
+    public ProyectoDto ( int proyectoId , String nombre , String descripcion , String fechaCreacion ) {
+        this.proyectoId = proyectoId;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.fecha_creacion = fecha_creacion;
+        this.fechaCreacion = fechaCreacion;
     }
 
 }

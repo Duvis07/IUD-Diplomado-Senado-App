@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class RolDto {
 
-    private int rol_id;
+    private int rolId;
     private String nombre;
 
     public RolDto ( ) {
     }
 
-    public RolDto ( int rol_id , String nombre ) {
-        this.rol_id = rol_id;
+    public RolDto ( int rolId , String nombre ) {
+        this.rolId = rolId;
         this.nombre = nombre;
     }
 

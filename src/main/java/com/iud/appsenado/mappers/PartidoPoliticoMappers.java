@@ -1,22 +1,22 @@
 package com.iud.appsenado.mappers;
 
-import com.iud.appsenado.dto.Partido_PoliticoDto;
-import com.iud.appsenado.models.Partido_Politico;
+import com.iud.appsenado.dto.PartidoPoliticoDto;
+import com.iud.appsenado.models.PartidoPolitico;
 
 public class PartidoPoliticoMappers {
 
-    public Partido_Politico partidoPoliticoDtoAPartidoPolitico ( Partido_PoliticoDto partidoPoliticoDto ) {
-        Partido_Politico partidoPolitico = new Partido_Politico ( );
-        partidoPolitico.setPartido_id ( partidoPoliticoDto.getPartido_id ( ) );
+    public PartidoPolitico partidoPoliticoDtoAPartidoPolitico ( PartidoPoliticoDto partidoPoliticoDto ) {
+        PartidoPolitico partidoPolitico = new PartidoPolitico ( );
+        partidoPolitico.setPartidoId ( partidoPoliticoDto.getPartidoId ( ) );
         partidoPolitico.setNombre ( partidoPoliticoDto.getNombre ( ) );
 
         return partidoPolitico;
 
     }
 
-    public Partido_PoliticoDto partidoPoliticoAPartidoPoliticoDto ( Partido_Politico partidoPolitico ) {
-        Partido_PoliticoDto partidoPoliticoDto = new Partido_PoliticoDto ( );
-        partidoPoliticoDto.setPartido_id ( partidoPolitico.getPartido_id ( ) );
+    public PartidoPoliticoDto partidoPoliticoAPartidoPoliticoDto ( PartidoPolitico partidoPolitico ) {
+        PartidoPoliticoDto partidoPoliticoDto = new PartidoPoliticoDto ( );
+        partidoPoliticoDto.setPartidoId ( partidoPolitico.getPartidoId ( ) );
         partidoPoliticoDto.setNombre ( partidoPolitico.getNombre ( ) );
 
         return partidoPoliticoDto;

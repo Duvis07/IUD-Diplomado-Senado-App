@@ -13,7 +13,7 @@ public class PartidoPoliticoController {
     private PartidoPoliticoService partidoPoliticoService;
 
     @CrossOrigin
-    @PostMapping(value = "/partidoPolitico")
+    @PostMapping(value = "/crearPartidoPolitico")
     public PartidoPoliticoDto guardarPartidoPolitico ( @RequestBody PartidoPoliticoDto partidoPoliticoDto ) {
         return partidoPoliticoService.guardarPartidoPolitico ( partidoPoliticoDto );
     }

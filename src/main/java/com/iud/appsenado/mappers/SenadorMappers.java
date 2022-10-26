@@ -11,7 +11,7 @@ public class SenadorMappers {
         senador.getSenadorId ();
         senador.getNombre ();
         senador.getDepartamento ();
-        senador.getPartidoId ();
+        senador.getPartido ();
 
         return senadorDto;
     }
@@ -21,7 +21,7 @@ public class SenadorMappers {
             senadorDto.getSenadorId ();
             senadorDto.getNombre ();
             senadorDto.getDepartamento ();
-            senadorDto.getPartidoId ();
+            senadorDto.getPartido ();
 
             return senador;
 

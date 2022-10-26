@@ -19,18 +19,45 @@ public class Senador {
 
     @Column(name = "departamento", nullable = false)
     private  String departamento;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "partido")
-    private PartidoPolitico partidoId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+           // cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @JoinColumn(name = "Partido_id")
+    private PartidoPolitico partido;
 
     public Senador() {
     }
 
-    public Senador( int senadorId , String nombre, String departamento, PartidoPolitico partidoId ) {
+    public Senador( String nombre, String departamento) {
+        this.nombre = nombre;
+        this.departamento = departamento;
+    }
+    public Senador( String nombre, String departamento, PartidoPolitico partido ) {
+        this.nombre = nombre;
+        this.departamento = departamento;
+        this.partido = partido;
+    }
+
+    public Senador( int senadorId , String nombre, String departamento, PartidoPolitico partido ) {
         this.senadorId = senadorId;
         this.nombre = nombre;
         this.departamento = departamento;
-        this.partidoId = partidoId;
+        this.partido = partido;
     }
 
+    public int getSenadorId() {
+        return senadorId;
+    }
+
+    public void setSenadorId(int senadorId) {
+        this.senadorId = senadorId;
+    }
+
+    @Override
+    public String toString() {
+        return "Senador{" +
+                "senadorId=" + senadorId +
+                ", nombre='" + nombre + '\'' +
+                ", departamento='" + departamento + '\'' +
+                '}';
+    }
 }

@@ -10,11 +10,11 @@ import javax.persistence.*;
 public class PartidoPolitico {
 
     @Id
-    @Column(name = "idPartido", unique = true, nullable = false)
+    @Column(name = "partidoId", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int partidoId;
 
-    @Column(name = "nombrePartido", nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
 

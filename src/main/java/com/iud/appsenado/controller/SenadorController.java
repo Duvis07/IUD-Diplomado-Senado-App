@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/senadores")
 public class SenadorController {
 
     @Autowired
@@ -14,13 +15,13 @@ public class SenadorController {
 
 
     @CrossOrigin
-    @PostMapping(value = "/crearSenador")
+    @PostMapping
     public SenadorDto crearSenador(@RequestBody SenadorDto senadorDto) {
       return senadorService.guardarSenador(senadorDto);
     }
 
     @CrossOrigin
-    @PostMapping(value = "/actualizarSenador/{senadorId}")
+    @PutMapping(value = "/{senadorId}")
     public SenadorDto actualizarSenador(@RequestBody SenadorDto senadorDto) {
         if (senadorDto.getSenadorId() != 0) {
             return senadorService.guardarSenador(senadorDto);
@@ -29,19 +30,19 @@ public class SenadorController {
     }
 
     @CrossOrigin
-    @DeleteMapping(value = "/eliminarSenador/{senadorId}")
+    @DeleteMapping(value = "/{senadorId}")
     public void eliminarSenador(@PathVariable int senadorId) {
         senadorService.eliminarSenador(senadorId);
     }
 
     @CrossOrigin
-    @GetMapping(value = "/obtenerSenadores")
+    @GetMapping
     public Iterable< Senador > obtenerSenadores() {
         return senadorService.obtenerSenadores();
     }
 
     @CrossOrigin
-    @GetMapping(value = "/obtenerSenadorPorId/{senadorId}")
+    @GetMapping(value = "/{senadorId}")
     public SenadorDto obtenerSenadorPorId(@PathVariable int senadorId) {
         return senadorService.obtenerSenadorPorId(senadorId);
     }

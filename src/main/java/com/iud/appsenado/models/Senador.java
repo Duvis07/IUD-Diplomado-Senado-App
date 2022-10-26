@@ -1,6 +1,7 @@
 package com.iud.appsenado.models;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,10 +15,10 @@ public class Senador {
     @Column(name = "idSenador", unique = true, nullable = false)
     private int senadorId;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "departamento", nullable = false)
+    @Column(name = "departamento")
     private  String departamento;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "partido")

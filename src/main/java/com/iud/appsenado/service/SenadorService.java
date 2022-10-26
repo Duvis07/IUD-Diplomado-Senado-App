@@ -12,8 +12,8 @@ public class SenadorService {
 
     @Autowired
     private SenadorRepository senadorRepository;
-
-    SenadorMappers senadorMappers = new SenadorMappers ( );
+    @Autowired
+    SenadorMappers senadorMappers;
 
     public SenadorDto guardarSenador( SenadorDto senadorDto ) {
            Senador senador = senadorMappers.senadorDtoASenador ( senadorDto);

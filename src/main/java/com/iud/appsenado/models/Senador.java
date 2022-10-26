@@ -21,7 +21,6 @@ public class Senador {
     @Column(name = "departamento")
     private  String departamento;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-           // cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     @JoinColumn(name = "Partido_id")
     private PartidoPolitico partido;
 

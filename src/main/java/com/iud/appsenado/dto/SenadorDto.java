@@ -12,17 +12,20 @@ public class SenadorDto {
     @JsonProperty("departamento")
     private String departamento;
 
-    private PartidoPoliticoDto partidoId;
+    //private PartidoPoliticoDto partidoId;
+
+    private PartidoPoliticoDto partido;
 
 
     public SenadorDto ( ) {
     }
 
-    public SenadorDto ( int senadorId , String nombre , String departamento , PartidoPoliticoDto partidoId ) {
-        this.senadorId = senadorId;
+    public SenadorDto ( //int senadorId
+                         String nombre , String departamento , PartidoPoliticoDto partido ) {
+        //this.senadorId = senadorId;
         this.nombre = nombre;
         this.departamento = departamento;
-        this.partidoId = partidoId;
+        this.partido = partido;
     }
 
 }

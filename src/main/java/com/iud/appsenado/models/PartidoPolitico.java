@@ -20,23 +20,21 @@ public class PartidoPolitico {
     private String nombre;
 
 
-    @OneToMany (mappedBy = "senadorId")//cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @OneToMany (mappedBy = "senadorId")
     private List<Senador> senadores;
 
     public PartidoPolitico ( ) {
     }
 
-    public PartidoPolitico ( int partidoId , String nombre ) {
+    public PartidoPolitico ( int partidoId , String nombre, List < Senador > senadores ) {
         this.partidoId = partidoId;
         this.nombre = nombre;
+        this.senadores = senadores;
     }
 
-    public void agregarSenadores(Senador elSenador){
-        if (senadores==null) senadores = new ArrayList<>();
-        senadores.add(elSenador);
-        elSenador.setPartido(this);
+
 
 
     }
 
-}
+

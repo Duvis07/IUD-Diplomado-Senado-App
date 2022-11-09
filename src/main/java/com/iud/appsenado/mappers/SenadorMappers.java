@@ -24,17 +24,17 @@ public class SenadorMappers {
     }
 
     public Senador senadorDtoASenador ( SenadorDto senadorDto ) {
-           var senador = new Senador ( );
-              senador.setSenadorId ( senadorDto.getSenadorId ( ) );
-                senador.setNombre ( senadorDto.getNombre ( ) );
-                senador.setDepartamento ( senadorDto.getDepartamento ( ) );
+        var senador = new Senador ( );
+        senador.setSenadorId ( senadorDto.getSenadorId ( ) );
+        senador.setNombre ( senadorDto.getNombre ( ) );
+        senador.setDepartamento ( senadorDto.getDepartamento ( ) );
 
         PartidoPolitico partidoPolitico = new PartidoPolitico ( );
         partidoPolitico.setPartidoId ( senadorDto.getPartido ( ).getPartidoId ( ) );
         senador.setPartido ( partidoPolitico );
 
 
-            return senador;
+        return senador;
 
     }
 

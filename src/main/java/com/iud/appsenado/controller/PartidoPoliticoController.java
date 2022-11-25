@@ -1,55 +1,58 @@
 package com.iud.appsenado.controller;
 
-import com.iud.appsenado.dto.PartidoPoliticoDto;
+
 import com.iud.appsenado.models.PartidoPolitico;
 import com.iud.appsenado.service.PartidoPoliticoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
-
+@RequestMapping("/partidos")
 public class PartidoPoliticoController {
-
+    //@PreAuthorize("hasAnyRole('STUDENT', 'TEACHER')")  ---> Autorizar varios Roles
     @Autowired
     private PartidoPoliticoService partidoPoliticoService;
 
     @CrossOrigin
-    @PostMapping(value = "/crearPartidoPolitico")
-    public PartidoPoliticoDto guardarPartidoPolitico ( @RequestBody PartidoPoliticoDto partidoPoliticoDto ) {
-        return partidoPoliticoService.guardarPartidoPolitico ( partidoPoliticoDto );
+    @PreAuthorize( "hasRole('ADMIN')" )
+    @PostMapping
+    public PartidoPolitico guardarPartidoPolitico ( @RequestBody PartidoPolitico partidoPolitico ) {
+        return partidoPoliticoService.guardarPartidoPolitico ( partidoPolitico );
     }
 
     @CrossOrigin
-    @GetMapping(value = "/obtenerPartidosPoliticos")
+    @GetMapping
     public Iterable < PartidoPolitico > obtenerPartidosPoliticos ( ) {
         return partidoPoliticoService.obtenerPartidosPoliticos ( );
-
     }
 
     @CrossOrigin
-    @DeleteMapping(value = "/eliminarPartidoPolitico/{partidoId}")
-    public void eliminarPartidoPolitico ( @PathVariable int partidoId ) {
-        partidoPoliticoService.eliminarPartidoPolitico ( partidoId );
-
-
-    }
-
-    @CrossOrigin
-    @GetMapping(value = "/obtenerPartidoPoliticoPorId/{partidoId}")
-    public PartidoPoliticoDto obtenerPartidoPoliticoPorId ( @PathVariable int partidoId ) {
-        return partidoPoliticoService.obtenerPartidoPoliticoPorId ( partidoId );
+    @PreAuthorize ( "hasRole('ADMIN')" )
+    @DeleteMapping("/{id}")
+    public void eliminarPartidoPolitico ( @PathVariable Integer id )
+    {
+        partidoPoliticoService.eliminarPartidoPolitico ( id );
     }
 
 
+//cambiar metodo a put
     @CrossOrigin
- @PostMapping(value = "/actualizarPartidoPolitico/{partidoId}")
-    public PartidoPoliticoDto actualizarPartidoPolitico ( @RequestBody PartidoPoliticoDto partidoPoliticoDto ) {
-        if (partidoPoliticoDto.getPartidoId ( ) != 0) {
-            return partidoPoliticoService.guardarPartidoPolitico ( partidoPoliticoDto );
+    @PreAuthorize ( "hasRole('ADMIN')" )
+    @GetMapping("/{id}")
+    public Optional<PartidoPolitico>  obtenerPartidoPoliticoPorId ( @PathVariable Integer id ) {
+        return partidoPoliticoService.obtenerPartidoPoliticoPorId ( id );
 
-        }
+    }
 
-        throw new RuntimeException ( "El id no existe" );
+
+    @CrossOrigin
+    @PreAuthorize ( "hasRole('ADMIN')" )
+    @PutMapping(value = "/{id}")
+    public PartidoPolitico actualizarPartidoPolitico ( @RequestBody PartidoPolitico partidoPolitico ) {
+        return partidoPoliticoService.actualizarPartidoPolitico ( partidoPolitico );
 
 
     }

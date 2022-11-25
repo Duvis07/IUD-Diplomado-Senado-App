@@ -11,29 +11,26 @@ import java.util.List;
 public class PartidoPolitico {
 
     @Id
-    @Column(name = "partidoId", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int partidoId;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
 
-    @OneToMany (mappedBy = "senadorId")
-    private List<Senador> senadores;
 
     public PartidoPolitico ( ) {
     }
 
-    public PartidoPolitico ( int partidoId , String nombre, List < Senador > senadores ) {
-        this.partidoId = partidoId;
+    public PartidoPolitico ( Integer id , String nombre ) {
+        this.id = id;
         this.nombre = nombre;
-        this.senadores = senadores;
-    }
-
 
 
 
     }
+
+}
 
 

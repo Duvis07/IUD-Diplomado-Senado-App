@@ -1,52 +1,61 @@
 package com.iud.appsenado.controller;
 
-import com.iud.appsenado.dto.ProyectoDto;
+
 import com.iud.appsenado.models.Proyecto;
 import com.iud.appsenado.service.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
+@RequestMapping("/proyectos")
 public class ProyectoController {
 
     @Autowired
     private ProyectoService proyectoService;
 
     @CrossOrigin
-    @PostMapping(value = "/crearProyecto")
-    public ProyectoDto guardarProyecto ( @RequestBody ProyectoDto proyectoDto ) {
-        return proyectoService.guardarProyecto ( proyectoDto );
+    @PostMapping
+    @PreAuthorize( "hasRole('ADMIN')" )
+    public Proyecto guardarProyecto ( @RequestBody Proyecto proyecto ) {
+        return proyectoService.guardarProyecto ( proyecto );
     }
 
     @CrossOrigin
-    @PostMapping(value = "/actualizarProyecto/{proyectoId}")
-    public ProyectoDto actualizarProyecto ( @RequestBody ProyectoDto proyectoDto ) {
-        if (proyectoDto.getProyectoId ( ) != 0) {
-            return proyectoService.guardarProyecto ( proyectoDto );
-
-        }
-        throw new RuntimeException ( "El id no existe" );
-
-
-    }
-
-    @CrossOrigin
-    @DeleteMapping(value = "/eliminarProyecto/{proyectoId}")
-    public void eliminarProyecto ( @PathVariable int proyectoId ) {
-        proyectoService.eliminarProyecto ( proyectoId );
-
-    }
-
-    @CrossOrigin
-    @GetMapping(value = "/obtenerProyectos")
+    @PreAuthorize( "hasRole('ADMIN')" )
+    @GetMapping
     public Iterable < Proyecto > obtenerProyectos ( ) {
         return proyectoService.obtenerProyectos ( );
 
     }
 
     @CrossOrigin
-    @GetMapping(value = "/obtenerProyectoPorId/{proyectoId}")
-    public ProyectoDto obtenerProyectoPorId ( @PathVariable int proyectoId ) {
-        return proyectoService.obtenerProyectoPorId ( proyectoId );
+    @PreAuthorize( "hasRole('ADMIN')" )
+    @DeleteMapping("/{id}")
+    public void eliminarProyecto ( @PathVariable Integer id ) {
+        proyectoService.eliminarProyecto ( id );
+
     }
+
+    @CrossOrigin
+    @PreAuthorize( "hasRole('ADMIN')" )
+    @GetMapping("/{id}")
+    public Optional < Proyecto > obtenerProyectoPorId ( @PathVariable Integer id ) {
+        return proyectoService.obtenerProyectoPorId ( id );
+    }
+
+    @CrossOrigin
+    @PreAuthorize( "hasRole('ADMIN')" )
+    @PutMapping(value = "/{id}")
+    public Proyecto actualizarProyecto ( @RequestBody Proyecto proyecto ) {
+        return proyectoService.actualizarProyecto ( proyecto );
+
+
+    }
+
+
+
 }

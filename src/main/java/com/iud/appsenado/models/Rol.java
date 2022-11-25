@@ -11,19 +11,19 @@ public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idRol", unique = true, nullable = false)
-    private int rolId;
+    @Column(name = "id", unique = true, nullable = false)
+    private int id;
 
 
-    @Column(name = "nombreRol", nullable = false)
+    @Column(name = "rol", nullable = false)
     private String nombre;
 
 
     public Rol ( ) {
     }
 
-    public Rol ( int rolId , String nombre ) {
-        this.rolId = rolId;
+    public Rol ( int id , String nombre ) {
+        this.id = id;
         this.nombre = nombre;
     }
 

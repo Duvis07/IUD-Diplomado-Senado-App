@@ -1,11 +1,13 @@
-package com.iud.library.security;
+package com.iud.appsenado.security;
 
-import com.iud.library.entity.LibraryUser;
-import com.iud.library.entity.Role;
-import com.iud.library.repository.LibraryUserRepository;
+
+import com.iud.appsenado.models.Rol;
+import com.iud.appsenado.models.Usuario;
+import com.iud.appsenado.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,19 +21,19 @@ import java.util.stream.Collectors;
 public class CustomUserDetailsService implements UserDetailsService{
 
     @Autowired
-    private LibraryUserRepository libraryUserRepository;
+    private UsuarioRepository usuarioRepository;
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-        LibraryUser libraryUser = libraryUserRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with that username or email: " + usernameOrEmail));
+        Usuario usuario = usuarioRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con ese userName o email: " + usernameOrEmail));
 
-        Set<Role> roles = Set.of(libraryUser.getRole());
 
-        return new org.springframework.security.core.userdetails.User(libraryUser.getEmail(), libraryUser.getPassword(), mapRoles(roles));
+
+        return new User (usuario.getEmail(), usuario.getPassword(), mapearRoles(usuario.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRoles(Set<Role> roles){
-        return roles.stream().map(rol -> new SimpleGrantedAuthority(rol.getName())).collect(Collectors.toList());
+    private Collection<? extends GrantedAuthority> mapearRoles(Set<Rol> roles){
+        return roles.stream().map(rol -> new SimpleGrantedAuthority(rol.getNombre())).collect(Collectors.toList());
     }
 }

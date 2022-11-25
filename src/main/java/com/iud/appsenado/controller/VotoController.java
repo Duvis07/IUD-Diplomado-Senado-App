@@ -29,6 +29,20 @@ public class VotoController {
 
     @CrossOrigin
     @PreAuthorize( "hasRole('ADMIN')" )
+    @GetMapping
+    public Iterable < Voto > obtenerVotos ( ) {
+
+        try {
+            return votoService.obtenerVotos ( );
+        } catch (Exception e) {
+            log.error("Error al obtener votos", e);
+            return null;
+        }
+
+    }
+
+    @CrossOrigin
+    @PreAuthorize( "hasRole('ADMIN')" )
     @PutMapping(value = "/{id}")
     public Voto actualizarVoto ( @RequestBody Voto voto ) {
         return votoService.actualizarVoto ( voto );
@@ -42,19 +56,7 @@ public class VotoController {
         votoService.eliminarVoto ( id );
     }
 
-    @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
-    @GetMapping
-    public Iterable < Voto > obtenerVotos ( ) {
 
-        try {
-            return votoService.obtenerVotos ( );
-        } catch (Exception e) {
-            log.error("Error al obtener votos", e);
-            return null;
-        }
-
-    }
 
     @CrossOrigin
     @PreAuthorize( "hasRole('ADMIN')" )

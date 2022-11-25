@@ -19,20 +19,16 @@ public class Voto {
     @JoinColumn(name = "proyecto_id")
     private Proyecto proyecto;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "senador_id")
-//    private  Senador senadores;
-
     @Column(name= "nombre_votante", nullable = false)
     private String votante;
 
     @Column(name="aprobado", nullable = false)
-    private Boolean aprobado;
+    private boolean aprobado;
 
     public Voto() {
     }
 
-    public Voto(int id, Proyecto proyecto, String votante, Boolean aprobado) {
+    public Voto(int id, Proyecto proyecto, String votante, boolean aprobado) {
         this.id = id;
         this.proyecto = proyecto;
         this.votante = votante;

@@ -1,4 +1,4 @@
-package com.iud.library.dto;
+package com.iud.appsenado.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

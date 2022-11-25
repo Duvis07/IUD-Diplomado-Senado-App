@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class PartidoPoliticoDto {
 
-    private int partidoId;
+    private int id;
     private String nombre;
 
     private List < SenadorDto > senadores;
@@ -16,8 +16,8 @@ public class PartidoPoliticoDto {
     public PartidoPoliticoDto ( ) {
     }
 
-    public PartidoPoliticoDto ( int partidoId , String nombre, List < SenadorDto > senadores ) {
-        this.partidoId = partidoId;
+    public PartidoPoliticoDto ( int id , String nombre, List < SenadorDto > senadores ) {
+        this.id = id;
         this.nombre = nombre;
         this.senadores = senadores;
     }

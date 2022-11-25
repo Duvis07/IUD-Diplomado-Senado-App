@@ -1,10 +1,12 @@
 package com.iud.appsenado.controller;
 
-import com.iud.appsenado.dto.UsuarioDto;
 import com.iud.appsenado.models.Usuario;
 import com.iud.appsenado.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -14,37 +16,44 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @CrossOrigin
+    @PreAuthorize ( "hasRole('ADMIN')" )
     @PostMapping
-    public UsuarioDto crearUsuario ( @RequestBody UsuarioDto usuarioDto ) {
-        return usuarioService.guardarUsuario ( usuarioDto );
+    public Usuario crearUsuario ( @RequestBody Usuario usuario ) {
+        return usuarioService.guardarUsuario ( usuario );
     }
 
     @CrossOrigin
-    @PutMapping(value = "/{usuarioId}")
-    public UsuarioDto actualizarUsuario ( @RequestBody UsuarioDto usuarioDto ) {
-        if (usuarioDto.getUsuarioId ( ) != 0) {
-            return usuarioService.guardarUsuario ( usuarioDto );
-        }
-        throw new RuntimeException ( "El id no existe" );
+    @PreAuthorize ( "hasRole('ADMIN')" )
+    @PutMapping(value = "/{id}")
+    public Usuario actualizarUsuario ( @RequestBody Usuario usuario ) {
+        return usuarioService.actualizarUsuario ( usuario );
     }
 
 
     @CrossOrigin
-    @DeleteMapping(value = "/{usuarioId}")
-    public void eliminarUsuario ( @PathVariable int usuarioId ) {
-        usuarioService.eliminarUsuario ( usuarioId );
+    @PreAuthorize ( "hasRole('ADMIN')" )
+    @DeleteMapping(value = "/{id}")
+    public void eliminarUsuario ( @PathVariable Integer id ) {
+        usuarioService.eliminarUsuario ( id );
     }
 
     @CrossOrigin
+    @PreAuthorize ( "hasRole('ADMIN')" )
     @GetMapping
     public Iterable < Usuario > obtenerUsuarios ( ) {
-        return usuarioService.obtenerUsuarios ( );
+        try {
+            return usuarioService.obtenerUsuarios ( );
+        } catch (Exception e) {
+            System.out.printf ( "error " );
+            return null;
+        }
     }
 
     @CrossOrigin
-    @GetMapping(value = "/{usuarioId}")
-    public UsuarioDto obtenerUsuarioPorId ( @PathVariable int usuarioId ) {
-        return usuarioService.obtenerUsuarioPorId ( usuarioId );
+    @PreAuthorize( "hasRole('ADMIN')" )
+    @GetMapping(value = "/{id}")
+    public Optional < Usuario > obtenerUsuarioPorId ( @PathVariable Integer id ) {
+        return usuarioService.obtenerUsuarioPorId ( id );
     }
 
 

@@ -1,24 +1,24 @@
 package com.iud.appsenado.service;
 
-import com.iud.appsenado.dto.PartidoPoliticoDto;
-import com.iud.appsenado.mappers.PartidoPoliticoMappers;
+
 import com.iud.appsenado.models.PartidoPolitico;
 import com.iud.appsenado.repository.PartidoPoliticoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PartidoPoliticoService {
 
     @Autowired
-    private PartidoPoliticoRepository partidoPoliticoRepository;
+    PartidoPoliticoRepository partidoPoliticoRepository;
 
-    PartidoPoliticoMappers partidoPoliticoMappers = new PartidoPoliticoMappers ( );
 
-    public PartidoPoliticoDto guardarPartidoPolitico ( PartidoPoliticoDto partidoPoliticoDto ) {
-        PartidoPolitico partidoPolitico = partidoPoliticoMappers.partidoPoliticoDtoAPartidoPolitico ( partidoPoliticoDto );
-        partidoPoliticoRepository.save ( partidoPolitico );
-        return partidoPoliticoDto;
+
+    public PartidoPolitico guardarPartidoPolitico ( PartidoPolitico partidoPolitico ) {
+        return partidoPoliticoRepository.save ( partidoPolitico );
+
 
     }
 
@@ -27,18 +27,19 @@ public class PartidoPoliticoService {
     }
 
 
-    public  void eliminarPartidoPolitico ( int partidoId ) {
-        partidoPoliticoRepository.deleteById ( partidoId );
+    public  void eliminarPartidoPolitico ( Integer id ) {
+        partidoPoliticoRepository.deleteById ( id );
     }
 
 
-   public PartidoPoliticoDto obtenerPartidoPoliticoPorId ( int partidoId ) {
-        PartidoPolitico partidoPolitico = partidoPoliticoRepository.findById ( partidoId ).get ( );
-        PartidoPoliticoDto partidoPoliticoDto = partidoPoliticoMappers.partidoPoliticoAPartidoPoliticoDto ( partidoPolitico );
-        return partidoPoliticoDto;
-    }
+   public Optional < PartidoPolitico > obtenerPartidoPoliticoPorId ( Integer id) {
+       return partidoPoliticoRepository.findById ( id);
 
+   }
 
+   public PartidoPolitico actualizarPartidoPolitico ( PartidoPolitico partidoPolitico ) {
+       return partidoPoliticoRepository.save ( partidoPolitico );
+   }
 
 }
 

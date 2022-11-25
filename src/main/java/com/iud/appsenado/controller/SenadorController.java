@@ -1,10 +1,12 @@
 package com.iud.appsenado.controller;
 
-import com.iud.appsenado.dto.SenadorDto;
 import com.iud.appsenado.models.Senador;
 import com.iud.appsenado.service.SenadorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/senadores")
@@ -15,24 +17,11 @@ public class SenadorController {
 
 
     @CrossOrigin
+    @PreAuthorize( "hasRole('ADMIN')" )
     @PostMapping
-    public SenadorDto crearSenador(@RequestBody SenadorDto senadorDto) {
-      return senadorService.guardarSenador(senadorDto);
-    }
-
-    @CrossOrigin
-    @PutMapping(value = "/{senadorId}")
-    public SenadorDto actualizarSenador(@RequestBody SenadorDto senadorDto) {
-        if (senadorDto.getSenadorId() != 0) {
-            return senadorService.guardarSenador(senadorDto);
-        }
-        throw new RuntimeException("El id no existe");
-    }
-
-    @CrossOrigin
-    @DeleteMapping(value = "/{senadorId}")
-    public void eliminarSenador(@PathVariable int senadorId) {
-        senadorService.eliminarSenador(senadorId);
+    public Senador crearSenador(@RequestBody Senador senador)
+    {
+      return senadorService.guardarSenador(senador);
     }
 
     @CrossOrigin
@@ -42,10 +31,31 @@ public class SenadorController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/{senadorId}")
-    public SenadorDto obtenerSenadorPorId(@PathVariable int senadorId) {
-        return senadorService.obtenerSenadorPorId(senadorId);
+    @PreAuthorize ( "hasRole('ADMIN')" )
+    @DeleteMapping(value = "/{id}")
+    public void eliminarSenador(@PathVariable Integer id)
+    {
+        senadorService.eliminarSenador(id);
     }
+
+    @CrossOrigin
+    @PreAuthorize ( "hasRole('ADMIN')" )
+    @GetMapping(value = "/{id}")
+    public Optional < Senador > obtenerSenadorPorId( @PathVariable Integer id) {
+        return senadorService.obtenerSenadorPorId(id);
+    }
+    @CrossOrigin
+    @PreAuthorize ( "hasRole('ADMIN')" )
+    @PutMapping(value = "/{id}")
+    public Senador actualizarSenador(@RequestBody Senador senador)
+    {
+        return senadorService.actualizarSenador(senador);
+    }
+
+
+
+
+
 
 
 }

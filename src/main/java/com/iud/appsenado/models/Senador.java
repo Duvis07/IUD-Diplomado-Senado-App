@@ -1,63 +1,56 @@
 package com.iud.appsenado.models;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "senadores")
 public class Senador {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idSenador", unique = true, nullable = false)
-    private int senadorId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true, nullable = false)
+    private Integer id;
 
     @Column(name = "nombre")
     private String nombre;
 
     @Column(name = "departamento")
-    private  String departamento;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private String departamento;
+    @ManyToOne
     @JoinColumn(name = "Partido_id")
     private PartidoPolitico partido;
 
-    public Senador() {
+//    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                    CascadeType.REMOVE ,
+//                    CascadeType.REFRESH
+//            })
+//    @JoinTable(name = "votos_senadores",
+//            joinColumns = {
+//                    @JoinColumn(name = "senador_id")
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "voto_id")
+//            })
+//    private List < Voto > votos;
+
+
+    public Senador ( ) {
+
+
     }
 
-    public Senador( String nombre, String departamento) {
-        this.nombre = nombre;
-        this.departamento = departamento;
-    }
-    public Senador( String nombre, String departamento, PartidoPolitico partido ) {
+    public Senador ( int id , String nombre , String departamento , PartidoPolitico partido ) {
+        this.id = id;
         this.nombre = nombre;
         this.departamento = departamento;
         this.partido = partido;
+
     }
 
-    public Senador( int senadorId , String nombre, String departamento, PartidoPolitico partido ) {
-        this.senadorId = senadorId;
-        this.nombre = nombre;
-        this.departamento = departamento;
-        this.partido = partido;
-    }
 
-    public int getSenadorId() {
-        return senadorId;
-    }
-
-    public void setSenadorId(int senadorId) {
-        this.senadorId = senadorId;
-    }
-
-    @Override
-    public String toString() {
-        return "Senador{" +
-                "senadorId=" + senadorId +
-                ", nombre='" + nombre + '\'' +
-                ", departamento='" + departamento + '\'' +
-                '}';
-    }
 }

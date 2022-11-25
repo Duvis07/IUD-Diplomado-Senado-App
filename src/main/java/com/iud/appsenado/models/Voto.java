@@ -4,33 +4,38 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+
 @Data
 @Entity
-@Table(name = "voto")
+@Table(name = "votos")
 public class Voto {
 
     @Id
-    @Column(name = "votoId", unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int votoId;
+    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "proyectoId")
-    private Proyecto proyectoId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "proyecto_id")
+    private Proyecto proyecto;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "senadorId")
-    private Senador senadorId;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "senador_id")
+//    private  Senador senadores;
 
+    @Column(name= "nombre_votante", nullable = false)
+    private String votante;
+
+    @Column(name="aprobado", nullable = false)
+    private Boolean aprobado;
 
     public Voto() {
     }
 
-    public Voto( int votoId , Proyecto proyectoId , Senador senadorId ) {
-        this.votoId = votoId;
-        this.proyectoId = proyectoId;
-        this.senadorId = senadorId;
+    public Voto(int id, Proyecto proyecto, String votante, Boolean aprobado) {
+        this.id = id;
+        this.proyecto = proyecto;
+        this.votante = votante;
+        this.aprobado = aprobado;
     }
-
-
 }

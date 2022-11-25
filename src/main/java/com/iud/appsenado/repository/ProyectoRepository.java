@@ -1,5 +1,6 @@
 package com.iud.appsenado.repository;
 
+
 import com.iud.appsenado.models.Proyecto;
 import org.springframework.data.repository.CrudRepository;
 

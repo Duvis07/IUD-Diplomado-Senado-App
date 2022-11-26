@@ -2,7 +2,7 @@ package com.iud.appsenado.security;
 
 import java.util.Date;
 
-import com.iud.appsenado.exception.BlogAppException;
+import com.iud.appsenado.exceptions.BlogAppException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;

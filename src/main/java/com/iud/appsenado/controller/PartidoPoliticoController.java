@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -19,7 +20,7 @@ public class PartidoPoliticoController {
     @CrossOrigin
     @PreAuthorize( "hasRole('ADMIN')" )
     @PostMapping
-    public PartidoPolitico guardarPartidoPolitico ( @RequestBody PartidoPolitico partidoPolitico ) {
+    public PartidoPolitico guardarPartidoPolitico (@Valid @RequestBody PartidoPolitico partidoPolitico ) {
         return partidoPoliticoService.guardarPartidoPolitico ( partidoPolitico );
     }
 
@@ -51,7 +52,7 @@ public class PartidoPoliticoController {
     @CrossOrigin
     @PreAuthorize ( "hasRole('ADMIN')" )
     @PutMapping(value = "/{id}")
-    public PartidoPolitico actualizarPartidoPolitico ( @RequestBody PartidoPolitico partidoPolitico ) {
+    public PartidoPolitico actualizarPartidoPolitico (@Valid @RequestBody PartidoPolitico partidoPolitico ) {
         return partidoPoliticoService.actualizarPartidoPolitico ( partidoPolitico );
 
 

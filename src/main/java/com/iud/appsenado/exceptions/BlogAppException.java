@@ -1,4 +1,4 @@
-package com.iud.appsenado.exception;
+package com.iud.appsenado.exceptions;
 
 import org.springframework.http.HttpStatus;
 

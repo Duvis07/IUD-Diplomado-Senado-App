@@ -1,61 +1,67 @@
 package com.iud.appsenado.controller;
 
 
+import com.iud.appsenado.dto.ProyectoDto;
 import com.iud.appsenado.models.Proyecto;
-import com.iud.appsenado.service.ProyectoService;
+import com.iud.appsenado.interfaces.ProyectoServiceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/proyectos")
 public class ProyectoController {
 
     @Autowired
-    private ProyectoService proyectoService;
+    private ProyectoServiceDto proyectoServiceDto;
 
-    @CrossOrigin
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    @PreAuthorize( "hasRole('ADMIN')" )
-    public Proyecto guardarProyecto ( @RequestBody Proyecto proyecto ) {
-        return proyectoService.guardarProyecto ( proyecto );
+    public ResponseEntity < ProyectoDto > guardarProyecto ( @Valid @RequestBody ProyectoDto proyectoDto ) {
+        return new ResponseEntity <> ( proyectoServiceDto.crearProyecto ( proyectoDto ) , HttpStatus.CREATED );
     }
 
     @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
     @GetMapping
     public Iterable < Proyecto > obtenerProyectos ( ) {
-        return proyectoService.obtenerProyectos ( );
-
+        return proyectoServiceDto.obtenerProyectos ( );
     }
 
     @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public void eliminarProyecto ( @PathVariable Integer id ) {
-        proyectoService.eliminarProyecto ( id );
+    public ResponseEntity < String > eliminarProyecto ( @PathVariable Integer id ) {
+        proyectoServiceDto.eliminarProyecto ( id );
+        return new ResponseEntity <> ( "El proyecto con id " + id + " fue correctamente eliminado" , HttpStatus.OK );
 
     }
 
     @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
-    public Optional < Proyecto > obtenerProyectoPorId ( @PathVariable Integer id ) {
-        return proyectoService.obtenerProyectoPorId ( id );
+    public ResponseEntity < ProyectoDto > obtenerProyectoPorId ( @PathVariable Integer id ) {
+        return ResponseEntity.ok ( proyectoServiceDto.obtenerProyectoPorId ( id ) );
     }
 
+
+
+    //PENDIENTE
     @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{id}")
-    public Proyecto actualizarProyecto ( @RequestBody Proyecto proyecto ) {
-        return proyectoService.actualizarProyecto ( proyecto );
-
-
+    public ResponseEntity < ProyectoDto > actualizarProyecto ( @Valid @RequestBody ProyectoDto proyectoDto , @PathVariable Integer id ) {
+        ProyectoDto proyectoDtoResponse = proyectoServiceDto.actualizarProyecto ( proyectoDto , id );
+        return new ResponseEntity <> ( proyectoDtoResponse , HttpStatus.OK );
     }
-
-
 
 }
+
+
+
+

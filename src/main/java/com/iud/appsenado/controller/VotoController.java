@@ -1,68 +1,61 @@
 package com.iud.appsenado.controller;
 
+
+import com.iud.appsenado.dto.VotoDto;
 import com.iud.appsenado.models.Voto;
-import com.iud.appsenado.service.VotoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.iud.appsenado.interfaces.VotoServiceDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/votos")
 public class VotoController {
 
     @Autowired
-    private VotoService votoService;
+    private VotoServiceDto votoServiceDto;
 
-    private static final Logger log =
-            LoggerFactory.getLogger(VotoController.class);
-
-    @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public Voto crearVoto ( @RequestBody Voto voto ) {
-        return votoService.guardarVoto ( voto );
+    public ResponseEntity < VotoDto > guardarVoto ( @Valid @RequestBody VotoDto votoDto ) {
+        return new ResponseEntity <> ( votoServiceDto.crearVoto ( votoDto ) , HttpStatus.CREATED );
     }
 
     @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
     @GetMapping
     public Iterable < Voto > obtenerVotos ( ) {
+        return votoServiceDto.obtenerVotos ( );
+    }
 
-        try {
-            return votoService.obtenerVotos ( );
-        } catch (Exception e) {
-            log.error("Error al obtener votos", e);
-            return null;
-        }
+    @CrossOrigin
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity < String > eliminarVotos ( @PathVariable Integer id ) {
+        votoServiceDto.eliminarVoto ( id );
+        return new ResponseEntity <> ( "El voto con id " + id + " fue correctamente eliminado" , HttpStatus.OK );
 
     }
 
     @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{id}")
+    public ResponseEntity < VotoDto > obtenerVotoPorId ( @PathVariable Integer id ) {
+        return ResponseEntity.ok ( votoServiceDto.obtenerVotoPorId ( id ) );
+    }
+
+
+    //PENDIENTE
+    @CrossOrigin
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{id}")
-    public Voto actualizarVoto ( @RequestBody Voto voto ) {
-        return votoService.actualizarVoto ( voto );
-    }
-
-
-    @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
-    @DeleteMapping(value = "/{id}")
-    public void eliminarVoto ( @PathVariable Integer id ) {
-        votoService.eliminarVoto ( id );
-    }
-
-
-
-    @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
-    @GetMapping(value = "/{id}")
-    public Optional < Voto > obtenerVotoPorId ( @PathVariable Integer id ) {
-        return votoService.obtenerVotoPorId ( id );
+    public ResponseEntity < VotoDto > actualizarUsuarios ( @Valid @RequestBody VotoDto votoDto , @PathVariable Integer id ) {
+        VotoDto votoDtoResponse = votoServiceDto.actualizarVoto ( votoDto , id );
+        return new ResponseEntity <> ( votoDtoResponse , HttpStatus.OK );
     }
 
 

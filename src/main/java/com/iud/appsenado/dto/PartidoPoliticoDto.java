@@ -3,23 +3,27 @@ package com.iud.appsenado.dto;
 
 import lombok.Data;
 
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 
 @Data
 public class PartidoPoliticoDto {
 
     private int id;
+    @NotEmpty
+    @Size(min = 3, message = "El nombre debe tener entre 3 y 50 caracteres")
     private String nombre;
 
-    private List < SenadorDto > senadores;
+
 
     public PartidoPoliticoDto ( ) {
     }
 
-    public PartidoPoliticoDto ( int id , String nombre, List < SenadorDto > senadores ) {
+    public PartidoPoliticoDto ( int id , String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.senadores = senadores;
+
     }
 
 

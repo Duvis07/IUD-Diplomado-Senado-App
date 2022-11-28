@@ -49,7 +49,7 @@ public class VotoController {
     }
 
 
-    //PENDIENTE
+
     @CrossOrigin
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{id}")

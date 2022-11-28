@@ -47,7 +47,6 @@ public class SenadorController {
     }
 
 
-    //PENDIENTE
     @CrossOrigin
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{id}")

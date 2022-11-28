@@ -51,7 +51,6 @@ public class ProyectoController {
 
 
 
-    //PENDIENTE
     @CrossOrigin
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{id}")

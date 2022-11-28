@@ -47,7 +47,7 @@ public class UsuarioController {
     }
 
 
-    //PENDIENTE
+
     @CrossOrigin
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{id}")

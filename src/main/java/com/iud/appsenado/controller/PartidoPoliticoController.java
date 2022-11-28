@@ -22,7 +22,7 @@ public class PartidoPoliticoController {
     private PartidoPoliticoServiceDTO partidoPoliticoServiceDTO;
 
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity < PartidoPoliticoDto > guardarPartidoPolitico ( @Valid @RequestBody PartidoPoliticoDto partidoPoliticoDto ) {
         return new ResponseEntity <> ( partidoPoliticoServiceDTO.crearPartidoPolitico ( partidoPoliticoDto ) , HttpStatus.CREATED );
@@ -44,7 +44,7 @@ public class PartidoPoliticoController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity < PartidoPoliticoDto > obtenerPartidoPoliticoPorId ( @PathVariable Integer id ) {
         return ResponseEntity.ok ( partidoPoliticoServiceDTO.obtenerPartidoPoliticoPorId ( id ) );
@@ -52,7 +52,7 @@ public class PartidoPoliticoController {
 
 
     @CrossOrigin
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity < PartidoPoliticoDto > actualizarPartido ( @Valid @RequestBody PartidoPoliticoDto partidoPoliticoDto, @PathVariable Integer id ) {
       PartidoPoliticoDto partidoPoliticoDtoRespuesta = partidoPoliticoServiceDTO.actualizarPartidoPolitico ( partidoPoliticoDto , id );

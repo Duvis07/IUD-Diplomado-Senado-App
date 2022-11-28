@@ -21,7 +21,7 @@ public class ProyectoController {
     @Autowired
     private ProyectoServiceDto proyectoServiceDto;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping
     public ResponseEntity < ProyectoDto > guardarProyecto ( @Valid @RequestBody ProyectoDto proyectoDto ) {
         return new ResponseEntity <> ( proyectoServiceDto.crearProyecto ( proyectoDto ) , HttpStatus.CREATED );
@@ -34,7 +34,7 @@ public class ProyectoController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @DeleteMapping("/{id}")
     public ResponseEntity < String > eliminarProyecto ( @PathVariable Integer id ) {
         proyectoServiceDto.eliminarProyecto ( id );
@@ -43,7 +43,7 @@ public class ProyectoController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/{id}")
     public ResponseEntity < ProyectoDto > obtenerProyectoPorId ( @PathVariable Integer id ) {
         return ResponseEntity.ok ( proyectoServiceDto.obtenerProyectoPorId ( id ) );
@@ -52,7 +52,7 @@ public class ProyectoController {
 
 
     @CrossOrigin
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PutMapping(value = "/{id}")
     public ResponseEntity < ProyectoDto > actualizarProyecto ( @Valid @RequestBody ProyectoDto proyectoDto , @PathVariable Integer id ) {
         ProyectoDto proyectoDtoResponse = proyectoServiceDto.actualizarProyecto ( proyectoDto , id );

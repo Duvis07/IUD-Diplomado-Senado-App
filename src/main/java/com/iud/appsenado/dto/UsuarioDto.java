@@ -9,8 +9,11 @@ public class UsuarioDto {
     private int id;
     private String nombre;
 
-    private String correo;
-    private String contrasena;
+    private String email;
+
+    private String password;
+
+    private  String Username;
 
     private List < String > roles;
 
@@ -18,11 +21,12 @@ public class UsuarioDto {
     public UsuarioDto ( ) {
     }
 
-    public UsuarioDto ( int id , String nombre , String correo , String contrasena , List < String > roles ) {
+    public UsuarioDto ( int id , String nombre , String email , String password , String username , List < String > roles ) {
         this.id = id;
         this.nombre = nombre;
-        this.correo = correo;
-        this.contrasena = contrasena;
+        this.email = email;
+        this.password = password;
+        Username = username;
         this.roles = roles;
     }
 }

@@ -2,6 +2,7 @@ package com.iud.appsenado.models;
 
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
@@ -22,7 +23,7 @@ public class Usuario {
     private String nombre;
 
     @Column(name = "email", nullable = false)
-    @NotNull(message = "El correo no puede ser nulo")
+    @Email
     @Size(min = 3, max = 50, message = "El correo debe tener entre 3 y 50 caracteres")
     private String email;
 

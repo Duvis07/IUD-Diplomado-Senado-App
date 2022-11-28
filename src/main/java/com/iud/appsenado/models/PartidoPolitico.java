@@ -3,7 +3,6 @@ package com.iud.appsenado.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -14,6 +13,7 @@ public class PartidoPolitico {
     @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
 
     @Column(name = "nombre", nullable = false)
     private String nombre;

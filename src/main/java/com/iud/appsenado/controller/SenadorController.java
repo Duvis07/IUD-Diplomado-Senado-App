@@ -1,61 +1,58 @@
 package com.iud.appsenado.controller;
 
+import com.iud.appsenado.dto.SenadorDto;
 import com.iud.appsenado.models.Senador;
-import com.iud.appsenado.service.SenadorService;
+import com.iud.appsenado.interfaces.SenadorServiceDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/senadores")
 public class SenadorController {
 
     @Autowired
-    private SenadorService senadorService;
+    private SenadorServiceDto senadorServiceDto;
 
-
-    @CrossOrigin
-    @PreAuthorize( "hasRole('ADMIN')" )
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public Senador crearSenador(@RequestBody Senador senador)
-    {
-      return senadorService.guardarSenador(senador);
+    public ResponseEntity < SenadorDto > guardarSenador ( @Valid @RequestBody SenadorDto senadorDTO ) {
+        return new ResponseEntity <> ( senadorServiceDto.crearSenador ( senadorDTO ) , HttpStatus.CREATED );
     }
 
     @CrossOrigin
     @GetMapping
-    public Iterable< Senador > obtenerSenadores() {
-        return senadorService.obtenerSenadores();
+    public Iterable < Senador > obtenerSenadores ( ) {
+        return senadorServiceDto.obtenerSenadores ( );
     }
 
     @CrossOrigin
-    @PreAuthorize ( "hasRole('ADMIN')" )
-    @DeleteMapping(value = "/{id}")
-    public void eliminarSenador(@PathVariable Integer id)
-    {
-        senadorService.eliminarSenador(id);
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity < String > eliminarSenadores ( @PathVariable Integer id ) {
+        senadorServiceDto.eliminarSenador ( id );
+        return new ResponseEntity <> ( "El senador con id " + id + " fue correctamente eliminado" , HttpStatus.OK );
+
     }
 
     @CrossOrigin
-    @PreAuthorize ( "hasRole('ADMIN')" )
-    @GetMapping(value = "/{id}")
-    public Optional < Senador > obtenerSenadorPorId( @PathVariable Integer id) {
-        return senadorService.obtenerSenadorPorId(id);
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{id}")
+    public ResponseEntity < SenadorDto > obtenerSenadorPorId ( @PathVariable Integer id ) {
+        return ResponseEntity.ok ( senadorServiceDto.obtenerSenadorPorId ( id ) );
     }
+
+
     @CrossOrigin
-    @PreAuthorize ( "hasRole('ADMIN')" )
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{id}")
-    public Senador actualizarSenador(@RequestBody Senador senador)
-    {
-        return senadorService.actualizarSenador(senador);
+    public ResponseEntity < SenadorDto > actualizarSenador ( @Valid @RequestBody SenadorDto senadorDto , @PathVariable Integer id ) {
+        SenadorDto senadorDtoResponse = senadorServiceDto.actualizarSenador ( senadorDto , id );
+        return new ResponseEntity <> ( senadorDtoResponse , HttpStatus.OK );
     }
-
-
-
-
-
-
 
 }

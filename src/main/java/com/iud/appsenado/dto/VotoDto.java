@@ -5,22 +5,24 @@ import lombok.Data;
 
 
 
+
 @Data
 public class VotoDto {
 
     private int id;
-    private SenadorDto senadores;
+    private Proyecto proyecto;
 
-    private Proyecto proyectos;
+    private String votante;
+    private boolean aprobado;
 
 
     public VotoDto ( ) {
     }
 
-    public VotoDto ( int id , SenadorDto senadores , Proyecto proyectos ) {
+    public VotoDto ( int id, Proyecto proyecto, String votante, boolean aprobado ) {
         this.id = id;
-        this.senadores = senadores;
-        this.proyectos = proyectos;
+        this.proyecto = proyecto;
+        this.votante = votante;
+        this.aprobado = aprobado;
     }
-
 }

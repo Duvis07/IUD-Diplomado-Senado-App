@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Data
 @Entity
@@ -16,31 +16,17 @@ public class Proyecto {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "descripcion")
     private String descripcion;
     @ManyToOne
-    @JoinColumn(name = "responsable", nullable = false)
+    @JoinColumn(name = "responsable")
     private Senador responsable;
 
-    @Column(name = "fechaCreacion", nullable = false)
+    @Column(name = "fechaCreacion")
     private String fechaCreacion;
-
-//    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {
-//                    CascadeType.REMOVE,
-//                    CascadeType.REFRESH
-//            })
-//    @JoinTable(name = "proyecto_senador",
-//            joinColumns = {
-//                    @JoinColumn(name = "proyecto_id")
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "senador_id")
-//            })
-//    private List<Senador> senadores;
 
 
     public Proyecto ( ) {

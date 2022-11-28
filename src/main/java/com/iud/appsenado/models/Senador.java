@@ -24,19 +24,6 @@ public class Senador {
     @JoinColumn(name = "Partido_id")
     private PartidoPolitico partido;
 
-//    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {
-//                    CascadeType.REMOVE ,
-//                    CascadeType.REFRESH
-//            })
-//    @JoinTable(name = "votos_senadores",
-//            joinColumns = {
-//                    @JoinColumn(name = "senador_id")
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "voto_id")
-//            })
-//    private List < Voto > votos;
 
 
     public Senador ( ) {

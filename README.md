@@ -26,23 +26,23 @@ La aplicación debe ser capaz de registrar:
 Debido a que el caso de estudio no es lo suficientemente claro se infiere que:
 
 
--Se deben crear 6 entidades en la Base de datos (Roles, Usuarios, PartidoPoliticos, Senadores, Proyectos, Votos) y deben tener las siguientes restricciones:
+- Se deben crear 6 entidades en la Base de datos (Roles, Usuarios, PartidoPoliticos, Senadores, Proyectos, Votos) y deben tener las siguientes restricciones:
 
--Los Roles deben ser administrados por el SUPERADMIN es decir hacer la gestión desde la Base de datos.
--Los Usuarios, los Partidos políticos y los Senadores solo pueden ser creados, actualizados o eliminados por el Administrador 
--Los proyectos y los votos pueden ser gestionados por el usuario normal.
+- Los Roles deben ser administrados por el SUPERADMIN es decir hacer la gestión desde la Base de datos.
+- Los Usuarios, los Partidos políticos y los Senadores solo pueden ser creados, actualizados o eliminados por el Administrador 
+- Los proyectos y los votos pueden ser gestionados por el usuario normal.
 
 Es por ello que se presenta un arquitectura por Capas para el Desarrollo del software en la cual sobresalen los paquetes:
--Models : Clase donde se trabajan las Entidades hacia la BD
--Services : Es la Clase que nos ayuda con la conexión a los repositories (Se definen los métodos que un cliente puede utilizar)
--Repositories : Este es el componente encargado de resolver el acceso a los datos de nuestra aplicacion
--Controller: La capa que controla la aplicación, es decir, coordina la comunicacion entre las peticiones que se hacen desde un cliente, el modelo que procesa los datos
--Mappers: Por medio de la libreria ModelMapper nos permite copiar o mapear propiedades de un tipo de objeto a otro tipo de objeto, permitiendo copiar también los datos de las referencias a los objetos que contengan
--Config: Este contiene la configuracion del spring security
--Utilities: Este contiene la clase passwordEncoder la cual es una poderosa herramienta de cifrado en Spring Security 3.1
--Exceptions: Por medio de las excepciones podemos controlar los errores generados por la aplicacion. Podemos decir que una excepción es un evento que se produce cuando se ejecuta el programa de forma que interrumpe el flujo normal de instrucciones.
--Security: Este módulo se utiliza para incorporar seguridad de acceso a la aplicacion realizada. Este nos permite controlar el acceso por URL existentes en el  proyecto al igual nos permite proteger el programa.
--DTO:Los DTO son un tipo de objetos que sirven únicamente para transportar datos. EL DTO contiene las propiedades del objeto. Datos que pueden tener su origen en una o más entidades de información
+- Models : Clase donde se trabajan las Entidades hacia la BD
+- Services : Es la Clase que nos ayuda con la conexión a los repositories (Se definen los métodos que un cliente puede utilizar)
+- Repositories : Este es el componente encargado de resolver el acceso a los datos de nuestra aplicacion
+- Controller: La capa que controla la aplicación, es decir, coordina la comunicacion entre las peticiones que se hacen desde un cliente, el modelo que procesa los datos
+- Mappers: Por medio de la libreria ModelMapper nos permite copiar o mapear propiedades de un tipo de objeto a otro tipo de objeto, permitiendo copiar también los datos de las referencias a los objetos que contengan
+- Config: Este contiene la configuracion del spring security
+- Utilities: Este contiene la clase passwordEncoder la cual es una poderosa herramienta de cifrado en Spring Security 3.1
+- Exceptions: Por medio de las excepciones podemos controlar los errores generados por la aplicacion. Podemos decir que una excepción es un evento que se produce cuando se ejecuta el programa de forma que interrumpe el flujo normal de instrucciones.
+- Security: Este módulo se utiliza para incorporar seguridad de acceso a la aplicacion realizada. Este nos permite controlar el acceso por URL existentes en el  proyecto al igual nos permite proteger el programa.
+- DTO:Los DTO son un tipo de objetos que sirven únicamente para transportar datos. EL DTO contiene las propiedades del objeto. Datos que pueden tener su origen en una o más entidades de información
 
 
 

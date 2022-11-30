@@ -20,7 +20,7 @@ public class VotoController {
     @Autowired
     private VotoServiceDto votoServiceDto;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping
     public ResponseEntity < VotoDto > guardarVoto ( @Valid @RequestBody VotoDto votoDto ) {
         return new ResponseEntity <> ( votoServiceDto.crearVoto ( votoDto ) , HttpStatus.CREATED );
@@ -33,7 +33,7 @@ public class VotoController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @DeleteMapping("/{id}")
     public ResponseEntity < String > eliminarVotos ( @PathVariable Integer id ) {
         votoServiceDto.eliminarVoto ( id );
@@ -42,7 +42,7 @@ public class VotoController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/{id}")
     public ResponseEntity < VotoDto > obtenerVotoPorId ( @PathVariable Integer id ) {
         return ResponseEntity.ok ( votoServiceDto.obtenerVotoPorId ( id ) );
@@ -51,7 +51,7 @@ public class VotoController {
 
 
     @CrossOrigin
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PutMapping(value = "/{id}")
     public ResponseEntity < VotoDto > actualizarUsuarios ( @Valid @RequestBody VotoDto votoDto , @PathVariable Integer id ) {
         VotoDto votoDtoResponse = votoServiceDto.actualizarVoto ( votoDto , id );

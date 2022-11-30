@@ -13,6 +13,8 @@ public class ErrorDetalles {
         this.marcaDeTiempo = marcaDeTiempo;
         this.mensaje = mensaje;
         this.detalles = detalles;
+
+
     }
 
     public Date getMarcaDeTiempo() {
